@@ -1,0 +1,56 @@
+{
+  "name": "graphite-extension-standalone",
+  "version": "0.1.0",
+  "description": "Run Graphite's GTI (visual stacked-PR editor) standalone in a browser — no VSCode required.",
+  "keywords": [
+    "cli",
+    "git",
+    "graphite",
+    "gti",
+    "stacked-prs",
+    "tui"
+  ],
+  "license": "MIT",
+  "bin": {
+    "gt-ext-web": "bin/gt-ext-web.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "scripts/fetch-graphite.mjs"
+  ],
+  "type": "commonjs",
+  "scripts": {
+    "fetch-graphite": "node scripts/fetch-graphite.mjs",
+    "build": "tsc && npm run build:diff-panel",
+    "build:diff-panel": "esbuild src/diffPanel.ts --bundle --minify --format=iife --platform=browser --target=es2020 --outfile=dist/diff-panel.js",
+    "format": "oxfmt .",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
+    "check": "npm run format:check && npm run lint && npm run typecheck",
+    "prestart": "npm run build",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist graphite",
+    "postinstall": "node scripts/fetch-graphite.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@pierre/diffs": "^1.2.2",
+    "adm-zip": "^0.5.17",
+    "better-sqlite3": "^12.10.0",
+    "ws": "^8.20.1"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.8",
+    "@types/node": "^25.9.1",
+    "@types/ws": "^8.18.1",
+    "esbuild": "^0.24.0",
+    "oxfmt": "^0.51.0",
+    "oxlint": "^1.66.0",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
