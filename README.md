@@ -1,5 +1,7 @@
 # graphite-extension-standalone
 
+A small tool we find useful in our work.
+
 **Graphite's stacked-PR vscode/cursor UI, in your browser. No VSCode required.**
 
 _Do yout like the graphical view of your stacks and the click and drag, but don't want to launch a whole dedicated editor for it?_
