@@ -1,10 +1,10 @@
 # graphite-extension-standalone
 
-**Graphite's stacked-PR UI, in your browser. No VSCode required.**
+**Graphite's stacked-PR vscode/cursor UI, in your browser. No VSCode required.**
 
-The [Graphite GTI](https://graphite.dev) "Interactive" UI lives inside the
-official `graphite.gti-vscode` extension. This project runs the exact same UI
-as a standalone web app — same bundle, same protocol, no editor host needed.
+_Do yout like the graphical view of your stacks and the click and drag, but don't want to launch a whole dedicated editor for it?_
+
+This project runs the exact same UI as https://graphite.com/docs/vs-code-extension, as a standalone web app, no editor host needed.
 
 ## Install
 
@@ -13,7 +13,7 @@ npm install -g graphite-extension-standalone
 ```
 
 You need the [`gt`](https://graphite.dev/docs/installing-the-cli) CLI on your
-`PATH` and a Graphite-tracked repo.
+`PATH` (see Environment variables below) and a Graphite-tracked repo.
 
 ## Run
 
@@ -32,7 +32,7 @@ The Graphite VSCode extension is mostly a thin shell around two npm packages,
 `@withgraphite/gti-server` and `@withgraphite/gti-client`. This project
 replaces VSCode with the smallest possible runtime that satisfies the same
 contract: a fake `vscode` module, an HTTP server for the webview assets, and
-a WebSocket for the gti protocol. The vendored bundle is loaded and run
+a WebSocket for the gti protocol. The extension JS bundle is loaded and run
 unchanged.
 
 ---
@@ -65,9 +65,6 @@ You can change it later from the gear-icon settings popover → **Editor
 ### Caveats
 
 - **No authentication.** Don't go serving this away from localhost unless you know what you're doing.
-- **File watching on Linux is shallow.** Node doesn't support recursive
-  `fs.watch` there; in practice the extension only watches the repo root
-  and `.git`, so this rarely matters.
 
 ### Toolchain (if `npm install` builds from source)
 
